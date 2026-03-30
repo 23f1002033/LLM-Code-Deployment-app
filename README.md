@@ -1,3 +1,12 @@
+---
+title: LLM Code Deployment Service
+emoji: 🚀
+colorFrom: indigo
+colorTo: green
+sdk: docker
+app_port: 7860
+---
+
 # LLM Code Deployment Service
 
 An automated pipeline that receives coding tasks, generates complete web applications using Google's Gemini API, deploys them to GitHub Pages, and reports results back to an evaluation server — all without manual intervention.
