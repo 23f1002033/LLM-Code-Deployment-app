@@ -1,0 +1,13 @@
+.git
+.env
+.env.*
+__pycache__
+*.pyc
+logs/
+generated_tasks/
+.idea/
+.vscode/
+*.md
+.gitignore
+.dockerignore
+dashboard.py

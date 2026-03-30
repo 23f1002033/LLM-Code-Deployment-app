@@ -1,0 +1,29 @@
+# environment & secrets
+.env
+.env.*
+
+# python
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# runtime artifacts
+logs/
+generated_tasks/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# docker
+*.tar
