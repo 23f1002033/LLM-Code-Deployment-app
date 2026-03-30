@@ -11,12 +11,13 @@ from datetime import datetime, timezone
 from collections import defaultdict
 
 from fastapi import FastAPI, HTTPException, Request, Query
-from fastapi.responses import JSONResponse, PlainTextResponse
+from fastapi.responses import JSONResponse, PlainTextResponse, HTMLResponse
 
 from app import __version__
 from app.config import settings, flush_log_handlers
 from app.models import TaskRequest, HealthResponse
 from app import pipeline
+from app.dashboard_page import DASHBOARD_HTML
 
 log = logging.getLogger("deployment_service")
 
@@ -151,6 +152,7 @@ def create_app() -> FastAPI:
         return {
             "service": "LLM Code Deployment Service",
             "version": __version__,
+            "dashboard": "/dashboard",
             "docs": "/docs",
             "health": "/health",
         }
@@ -199,5 +201,12 @@ def create_app() -> FastAPI:
         except Exception as exc:
             log.error("Error reading logs: %s", exc)
             return PlainTextResponse(f"Error: {exc}", status_code=500)
+
+    # ---- embedded dashboard ----
+
+    @app.get("/dashboard", tags=["Monitoring"], include_in_schema=False)
+    async def dashboard():
+        """Visual monitoring dashboard (built-in, no separate process)."""
+        return HTMLResponse(content=DASHBOARD_HTML)
 
     return app
